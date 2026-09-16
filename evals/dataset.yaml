@@ -1,0 +1,95 @@
+# Labelled triage set. Written by hand before the classifier was tuned, so tuning cannot
+# move the target. Labels are the category a human operator would assign and the priority
+# band the business rules are expected to land in.
+version: eval-2026-09-16
+items:
+  - text: "Production checkout has been failing since 09:40. Every customer sees an error and cannot complete an order."
+    category: outage
+    max_priority: 1
+  - text: "The website is down for all users in the London office. Nothing loads."
+    category: outage
+    max_priority: 2
+  - text: "Our API returns 503 intermittently in production. Customers cannot submit forms."
+    category: outage
+    max_priority: 2
+  - text: "Scheduler service is unavailable since the deploy. No jobs are running."
+    category: outage
+    max_priority: 2
+  - text: "Clicking export throws an exception and a stack trace appears. There is a workaround with the CSV download."
+    category: bug
+    max_priority: 4
+  - text: "The totals on the summary screen are wrong when a discount is applied."
+    category: bug
+    max_priority: 4
+  - text: "Mobile app crashes when opening the settings page."
+    category: bug
+    max_priority: 4
+  - text: "Search returns an error for queries with an apostrophe."
+    category: bug
+    max_priority: 4
+  - text: "Could I get read access to the reporting dashboard when you have a minute? No rush."
+    category: access_request
+    max_priority: 5
+  - text: "New starter begins Monday and needs an account and a licence for the analytics tool."
+    category: access_request
+    max_priority: 4
+  - text: "Please reset my password, I am locked out of my account."
+    category: access_request
+    max_priority: 4
+  - text: "Requesting permission to the finance folder for the audit."
+    category: access_request
+    max_priority: 4
+  - text: "We were charged twice for September. Purchase order 8891 covers one licence only. Please refund."
+    category: billing
+    max_priority: 3
+  - text: "Invoice 4471 does not match our purchase order. Billing needs a corrected copy."
+    category: billing
+    max_priority: 3
+  - text: "Can you send a receipt for the annual payment?"
+    category: billing
+    max_priority: 4
+  - text: "Our renewal charge went through at the old rate. Refund the difference please."
+    category: billing
+    max_priority: 4
+  - text: "How do I add a second approver on a purchase workflow? I could not find it in the documentation."
+    category: how_to
+    max_priority: 5
+  - text: "Where is the guide for connecting the VPN from a personal laptop?"
+    category: how_to
+    max_priority: 5
+  - text: "How to export a report to PDF?"
+    category: how_to
+    max_priority: 5
+  - text: "Question about the retention settings: where are they configured?"
+    category: how_to
+    max_priority: 5
+  - text: "It would be nice to sort the queue by SLA due date. An enhancement for the roadmap, not blocking."
+    category: feature_request
+    max_priority: 5
+  - text: "Feature request: bulk assign tickets to a team."
+    category: feature_request
+    max_priority: 5
+  - text: "Would be nice to have dark mode in the console."
+    category: feature_request
+    max_priority: 5
+  - text: "I received a reset email from acme-support-verify.com asking for my credential. Looks like phishing."
+    category: security
+    max_priority: 2
+  - text: "Repeated unauthorized login attempts on the admin console overnight. A credential may have leaked."
+    category: security
+    max_priority: 2
+  - text: "We think a customer database was accessed in a breach. Please investigate immediately."
+    category: security
+    max_priority: 1
+  - text: "A CVE was published for the library we deploy in production. Do we need to patch?"
+    category: security
+    max_priority: 2
+  - text: "Join our webinar and start a free trial of our monitoring promotion. Unsubscribe any time."
+    category: spam
+    max_priority: 5
+  - text: "Newsletter: five ways to improve uptime, plus a promotion for new subscribers."
+    category: spam
+    max_priority: 5
+  - text: "Limited free trial offer for your team, unsubscribe below."
+    category: spam
+    max_priority: 5

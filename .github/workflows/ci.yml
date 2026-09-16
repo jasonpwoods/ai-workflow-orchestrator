@@ -1,0 +1,32 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - run: pip install -r requirements.txt ruff
+      - name: Lint
+        run: ruff check src tests evals
+      - name: Tests
+        run: python -m pytest
+      - name: Quality gate (accuracy, macro-F1, priority compliance)
+        run: python evals/gate.py
+      - name: Publish evaluation report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-report-py${{ matrix.python-version }}
+          path: evals/REPORT.md

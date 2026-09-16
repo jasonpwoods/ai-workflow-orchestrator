@@ -1,0 +1,7 @@
+2026-09-16 09:38:11 INFO checkout request completed in 120ms
+2026-09-16 09:40:02 ERROR checkout upstream payment gateway timeout, customers cannot complete orders in production
+2026-09-16 09:41:44 WARN checkout retry queue depth 412
+2026-09-16 09:42:10 ERROR billing invoice export failed: unhandled exception in report writer
+2026-09-16 09:50:00 INFO scheduler nightly job finished
+2026-09-16 10:04:19 CRITICAL auth unauthorized token reuse detected for two accounts, possible credential leak
+2026-09-16 10:15:00 INFO search index rebuilt

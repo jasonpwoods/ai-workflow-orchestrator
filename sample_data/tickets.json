@@ -1,0 +1,87 @@
+[
+  {
+    "id": "TCK-1001",
+    "subject": "Checkout returns 503 for all customers",
+    "body": "Production checkout has been failing since 09:40. Every customer sees an error page and cannot complete an order. This is affecting all users.",
+    "received_at": "2026-09-16T09:45:00Z",
+    "requester": "ops@acme.example.com"
+  },
+  {
+    "id": "TCK-1002",
+    "subject": "Access to the reporting dashboard",
+    "body": "Could I get read access to the reporting dashboard when you have a minute? No rush, whenever is fine.",
+    "received_at": "2026-09-16T10:02:00Z",
+    "requester": "dana@acme.example.com"
+  },
+  {
+    "id": "TCK-1003",
+    "subject": "Invoice 4471 looks wrong",
+    "body": "We were charged twice for September. Purchase order 8891 covers one licence only. Please refund the duplicate payment.",
+    "received_at": "2026-09-16T10:15:00Z",
+    "requester": "ap@acme.example.com"
+  },
+  {
+    "id": "TCK-1004",
+    "subject": "Export button throws an exception",
+    "body": "Clicking export on the orders screen shows an error and a stack trace appears in the console. There is a workaround: the CSV download still works.",
+    "received_at": "2026-09-16T10:30:00Z",
+    "requester": "sam@acme.example.com"
+  },
+  {
+    "id": "TCK-1005",
+    "subject": "Password reset email came from an odd domain",
+    "body": "I received a reset email from acme-support-verify.com asking for my credential. Looks like phishing. I did not click it but others might.",
+    "received_at": "2026-09-16T10:40:00Z",
+    "requester": "lee@acme.example.com"
+  },
+  {
+    "id": "TCK-1006",
+    "subject": "How do I add a second approver to a workflow?",
+    "body": "How do I add a second approver on a purchase workflow? I could not find it in the documentation.",
+    "received_at": "2026-09-16T11:00:00Z",
+    "requester": "ravi@acme.example.com"
+  },
+  {
+    "id": "TCK-1007",
+    "subject": "Would be nice to sort the queue by SLA",
+    "body": "A feature request: it would be nice to sort the queue by SLA due date. Not blocking anything, just an enhancement for the roadmap.",
+    "received_at": "2026-09-16T11:20:00Z",
+    "requester": "kim@acme.example.com"
+  },
+  {
+    "id": "TCK-1008",
+    "subject": "Database restore removed yesterday's records",
+    "body": "After last night's restore we have data loss: yesterday's records are gone and we cannot recover them from the UI. The whole team is blocked.",
+    "received_at": "2026-09-16T11:35:00Z",
+    "requester": "ops@acme.example.com"
+  },
+  {
+    "id": "TCK-1009",
+    "subject": "Free trial of our monitoring product",
+    "body": "Hello! Join our webinar and start a free trial of our monitoring promotion. Unsubscribe at any time.",
+    "received_at": "2026-09-16T11:50:00Z",
+    "requester": "marketing@vendor.example.net"
+  },
+  {
+    "id": "TCK-1010",
+    "subject": "Licence needed for new starter",
+    "body": "New starter begins Monday and needs an account and a licence for the analytics tool. Please onboard before then.",
+    "received_at": "2026-09-16T12:05:00Z",
+    "requester": "hr@acme.example.com"
+  },
+  {
+    "id": "TCK-1011",
+    "subject": "Reports time out for the board pack",
+    "body": "The quarterly report times out every time. We have an SLA on this and the board pack is due tomorrow. Please escalate.",
+    "received_at": "2026-09-16T12:20:00Z",
+    "requester": "chair@board.example.com"
+  },
+  {
+    "id": "TCK-1012",
+    "subject": "Checkout returns 503 for all customers",
+    "body": "Production checkout has been failing since 09:40. Every customer sees an error page and cannot complete an order. This is affecting all users.",
+    "received_at": "2026-09-16T12:30:00Z",
+    "requester": "ops@acme.example.com",
+    "metadata": { "note": "duplicate of TCK-1001, re-sent by the reporter" }
+  }
+]

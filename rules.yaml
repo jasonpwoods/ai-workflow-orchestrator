@@ -1,0 +1,86 @@
+# Business rules live in data, not in code or in a prompt.
+#
+# The model classifies. These rules decide what happens, because priority and routing
+# are business policy that has to be auditable and changeable without a deploy or a
+# prompt edit. Every rule that fires is recorded on the decision with its points.
+version: rules-2026-09-16
+
+base_points:
+  outage: 70
+  security: 70
+  bug: 40
+  access_request: 30
+  billing: 30
+  how_to: 15
+  feature_request: 10
+  spam: 0
+
+urgency_points:
+  critical: 30
+  high: 20
+  normal: 5
+  low: 0
+
+signals:
+  - id: production_impact
+    points: 25
+    any_of: ["production", "prod ", "customers cannot", "site is down", "outage", "not loading"]
+    why: names production impact
+  - id: data_loss
+    points: 30
+    any_of: ["data loss", "deleted records", "corrupted", "cannot recover"]
+    why: possible data loss
+  - id: security_words
+    points: 30
+    any_of: ["breach", "phishing", "credential", "unauthorized", "leaked key", "cve-"]
+    why: security language
+  - id: vip_requester
+    points: 15
+    requester_domains: ["board.example.com", "exec.example.com"]
+    why: requester is an executive account
+  - id: sla_breach_language
+    points: 10
+    any_of: ["sla", "contractual", "penalty", "escalate"]
+    why: contract or escalation language
+  - id: many_users
+    points: 15
+    any_of: ["all users", "everyone", "whole team", "entire office"]
+    why: affects many users
+  - id: money_at_risk
+    points: 20
+    any_of: ["refund", "charged twice", "double charge", "overcharge", "corrected invoice", "corrected copy", "does not match our purchase order"]
+    why: money already moved or is disputed
+  - id: has_workaround
+    points: -15
+    any_of: ["workaround", "temporary fix", "able to continue"]
+    why: a workaround exists
+  - id: low_signal
+    points: -20
+    any_of: ["unsubscribe", "webinar", "promotion", "free trial"]
+    why: marketing or bulk mail
+
+priority_bands:            # score -> priority, highest band that fits wins
+  - { min_score: 100, priority: 1 }
+  - { min_score: 75, priority: 2 }
+  - { min_score: 50, priority: 3 }
+  - { min_score: 25, priority: 4 }
+  - { min_score: 0, priority: 5 }
+
+sla_hours:                 # by priority
+  1: 1
+  2: 4
+  3: 24
+  4: 72
+  5: 168
+
+routing:                   # actions per priority, by name in the action registry
+  1: ["page_oncall", "open_incident", "notify_requester"]
+  2: ["open_incident", "notify_requester"]
+  3: ["create_ticket", "notify_requester"]
+  4: ["create_ticket"]
+  5: ["archive"]
+
+human_review:              # when a machine decision is not enough on its own
+  min_confidence: 0.55
+  always_for_categories: ["security"]
+  always_for_priority: [1]

@@ -1,0 +1,9 @@
+From: security-alerts@acme.example.com
+To: triage@acme.example.com
+Subject: Unauthorized login attempts on the admin console
+Date: Wed, 16 Sep 2026 08:12:00 +0000
+Content-Type: text/plain; charset="utf-8"
+
+We are seeing repeated unauthorized login attempts against the admin console from a
+single address overnight. No breach confirmed yet, but one credential may have leaked.
+Please review the access logs this morning.

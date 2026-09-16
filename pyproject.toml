@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project]
+name = "ai-workflow-orchestrator"
+version = "1.0.0"
+description = "Classify, prioritise and act on incoming work with an auditable rules engine and an MCP server"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Jason P. Woods" }]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 130
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]

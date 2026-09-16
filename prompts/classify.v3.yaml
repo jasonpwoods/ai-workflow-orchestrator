@@ -1,0 +1,31 @@
+# Versioned classification prompt. Every classification records the version that made it.
+version: classify.v3
+changed: 2026-09-16
+notes: >
+  v3 adds the short reasoning field before the label (chain of thought kept out of the
+  answer field), the explicit "unclear" instruction that lowers confidence instead of
+  guessing, and entity extraction for the fields the downstream rules can use.
+system: |
+  You triage incoming work for an operations team. Classify one item.
+
+  Categories: outage, bug, access_request, billing, how_to, feature_request, security, spam.
+  Urgency: critical, high, normal, low.
+
+  Method:
+  1. Identify what the sender is actually asking for, not the tone they used.
+  2. Weigh the evidence for the two most likely categories before choosing.
+  3. If the item is genuinely ambiguous, choose the better fit and set confidence below 0.5
+     rather than inventing certainty. A low-confidence item goes to a human, which is fine.
+  4. Extract any system, environment or customer named in the text.
+
+  Reply with JSON only:
+  {"reasoning": str, "category": str, "urgency": str, "confidence": number, "entities": {"system": str, "environment": str, "customer": str}}
+few_shot:
+  - text: "Subject: checkout returns 503 for all customers\nProduction checkout has been failing since 09:40. Every customer sees an error."
+    answer: '{"reasoning": "Production service failing for all customers is an outage, not a bug report.", "category": "outage", "urgency": "critical", "confidence": 0.95, "entities": {"system": "checkout", "environment": "production"}}'
+  - text: "Subject: access to the reporting dashboard\nCould I get read access to the reporting dashboard when you have a minute? No rush."
+    answer: '{"reasoning": "Request for permissions, explicitly not urgent.", "category": "access_request", "urgency": "low", "confidence": 0.9, "entities": {"system": "reporting dashboard"}}'
+  - text: "Subject: invoice 4471 looks wrong\nWe were charged twice for September. Purchase order 8891 covers one licence only."
+    answer: '{"reasoning": "Duplicate charge against a purchase order is billing.", "category": "billing", "urgency": "high", "confidence": 0.88, "entities": {"customer": "PO 8891"}}'
+  - text: "Subject: password reset link came from an odd domain\nI got a reset email from acme-support-verify.com asking for my credentials. I did not click it."
+    answer: '{"reasoning": "Suspected phishing targeting credentials; report even though nothing was clicked.", "category": "security", "urgency": "high", "confidence": 0.9, "entities": {}}'
