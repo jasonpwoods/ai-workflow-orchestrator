@@ -38,9 +38,9 @@ def macro_f1(truth: list[str], predicted: list[str]) -> tuple[float, dict[str, d
     per_label: dict[str, dict[str, float]] = {}
     scores = []
     for label in LABELS:
-        tp = sum(1 for t, p in zip(truth, predicted) if t == label and p == label)
-        fp = sum(1 for t, p in zip(truth, predicted) if t != label and p == label)
-        fn = sum(1 for t, p in zip(truth, predicted) if t == label and p != label)
+        tp = sum(1 for t, p in zip(truth, predicted, strict=True) if t == label and p == label)
+        fp = sum(1 for t, p in zip(truth, predicted, strict=True) if t != label and p == label)
+        fn = sum(1 for t, p in zip(truth, predicted, strict=True) if t == label and p != label)
         precision = tp / (tp + fp) if tp + fp else 0.0
         recall = tp / (tp + fn) if tp + fn else 0.0
         f1 = 2 * precision * recall / (precision + recall) if precision + recall else 0.0
@@ -95,7 +95,7 @@ def run() -> dict:
             )
 
     total = len(truth)
-    accuracy = sum(1 for t, p in zip(truth, predicted) if t == p) / total
+    accuracy = sum(1 for t, p in zip(truth, predicted, strict=True) if t == p) / total
     f1, per_label = macro_f1(truth, predicted)
     return {
         "provider": f"{classifier.provider.name}:{classifier.provider.model}",

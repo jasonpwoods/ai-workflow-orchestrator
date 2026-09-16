@@ -11,7 +11,6 @@ Operational behaviour that makes this a pipeline rather than a script:
 from __future__ import annotations
 
 import json
-import statistics
 import time
 from collections import Counter
 from datetime import UTC, datetime
